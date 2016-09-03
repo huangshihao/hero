@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import './rxjs-extension';
+
 
 @Component({
     moduleId:module.id,

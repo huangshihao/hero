@@ -19,6 +19,8 @@ export class HeroesComponent {
     }
     heroes : Hero[];
     selectHero:Hero;
+    addingHero = false;
+    error:any;
     getHeroes(){
         this.heroService.getHeroes().then(heroes => this.heroes = heroes);
     }
@@ -31,6 +33,25 @@ export class HeroesComponent {
     gotoDetail(id:number){
       let link = ['./detail',id];
       this.router.navigate(link);
+    }
+    addHero(){
+        this.addingHero = true;
+        this.selectHero = null;
+    }
+    close(saveHero:Hero){
+        this.addingHero = false;
+        if(saveHero){
+            this.getHeroes();
+        }
+    }
+    deleteHero(hero:Hero,event:any){
+        event.stopPropagation();
+        this.heroService.delete(hero)
+                        .then(res => {
+                            this.heroes = this.heroes.filter(h => h !== hero);
+                            if(this.selectHero === hero){ this.selectHero = null; }
+                        })
+                        .catch(e => this.error = e)
     }
 }
 

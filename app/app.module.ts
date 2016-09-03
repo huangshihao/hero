@@ -7,7 +7,11 @@ import { AppComponent }  from './app.component';
 import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { DashboardComponent } from './dashboard.component';
+import { HeroSearchComponent } from './hero-search.component';
 
+//ajax request data
+import { InMemoryDataService } from './in-memory-data.service';
+import { InMemoryWebApiModule } from 'angular2-in-memory-web-api';
 import { routing } from './app.routing';
 
 import { HeroService } from './hero.service';
@@ -17,13 +21,15 @@ import { HeroService } from './hero.service';
     BrowserModule,
     FormsModule,
     routing,
-    HttpModule
+    HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   declarations: [ 
     AppComponent,
     HeroesComponent,
     HeroDetailComponent,
-    DashboardComponent 
+    DashboardComponent,
+    HeroSearchComponent 
   ],
   providers:[
     HeroService
